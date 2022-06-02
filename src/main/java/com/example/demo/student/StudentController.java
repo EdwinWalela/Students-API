@@ -29,9 +29,14 @@ public class StudentController {
     this.studentService = studentService;
   }
 
-  @GetMapping
+  @GetMapping()
   public List<Student> getStudents(){
     return studentService.getStudents();
+  }
+
+  @GetMapping(path="{studentId}")
+  public Student getStudent(@PathVariable("studentId") Long id){
+    return this.studentService.getStudent(id).get();
   }
 
   @PostMapping

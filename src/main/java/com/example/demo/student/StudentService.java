@@ -31,21 +31,25 @@ public class StudentService {
 		return students;
 	}
 
+	public Optional<Student> getStudent(Long id){
+		return this.studentRepository.findById(id);
+	}
+
 	public void createStudent(Student student){
-		Optional<Student> exists = studentRepository.findStudentByEmail(student.getEmail());
+		Optional<Student> exists = this.studentRepository.findStudentByEmail(student.getEmail());
 		if(exists.isPresent()){
 			System.out.println("Email in use");
 		}else{
-			studentRepository.save(student);
+			this.studentRepository.save(student);
 		}
 	}
 
 	public void deleteStudent(Long id){
 		// Check if student exists
-		Boolean exists = studentRepository.existsById(id);
+		Boolean exists = this.studentRepository.existsById(id);
 		if (!exists){
 			throw new IllegalStateException("Student "+id+"doesn't exists");
 		}
-		studentRepository.deleteById(id);
+		this.studentRepository.deleteById(id);
 	}
 }
