@@ -8,6 +8,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/*
+ * 
+ * 
+ * 
+ */
 
 @Configuration
 public class StudentConfig {
@@ -18,14 +23,12 @@ public class StudentConfig {
       Student edwin = new Student(
         1L,
         "edwin",
-        22,
         LocalDate.of(1999,Month.SEPTEMBER,26),
         "edwin@email.com"
       );
 
       Student miriam = new Student(
         "miriam",
-        21,
         LocalDate.of(2002,Month.JANUARY,26),
         "miriam@email.com"
       );
