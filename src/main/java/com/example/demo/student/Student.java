@@ -28,7 +28,7 @@ public class Student {
   )
   private Long id;
   private String name;
-  @Transient //field below isnt a column in our db
+  @Transient //field below isnt a column in our db (it will be calculated)
   private Integer age;
   private LocalDate dob;
   private String email;
@@ -65,7 +65,7 @@ public class Student {
   }
   public Integer getAge() {
     // Calculate age from dob
-    return Period.between(dob, LocalDate.now()).getYears();
+    return Period.between(this.dob, LocalDate.now()).getYears();
   }
   public void setAge(Integer age) {
     this.age = age;
