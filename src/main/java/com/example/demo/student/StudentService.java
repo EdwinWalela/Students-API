@@ -5,6 +5,7 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /*
@@ -16,17 +17,20 @@ import org.springframework.stereotype.Service;
 // Handle business logic
 @Service // This is a service class
 public class StudentService {
-	public List<Student> getStudents(){
-		// Mapped to JSON
-		List<Student> students = new ArrayList<Student>();
-		students.add(new Student(
-			1L,
-			"edwin",
-			21,
-			LocalDate.of(1999,Month.SEPTEMBER,26),
-			"edwinwalela@gmail.com"
-			));
 
+	private final StudentRepository studentRepository;
+
+	@Autowired // Dependancy injection
+	public StudentService(StudentRepository studentRepository){
+		this.studentRepository = studentRepository;
+	}
+
+	public List<Student> getStudents(){
+		List<Student> students = this.studentRepository.findAll();
 		return students;
+	}
+
+	public void createStudent(){
+		
 	}
 }
