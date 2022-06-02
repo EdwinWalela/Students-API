@@ -34,7 +34,7 @@ public class StudentController {
     return studentService.getStudents();
   }
 
-  @GetMapping(path="{studentId}")
+  @GetMapping( path="{studentId}")
   public Student getStudent(@PathVariable("studentId") Long id){
     return this.studentService.getStudent(id).get();
   }
