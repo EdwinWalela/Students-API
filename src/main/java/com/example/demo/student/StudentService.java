@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +43,22 @@ public class StudentService {
 			System.out.println("Email in use");
 		}else{
 			this.studentRepository.save(student);
+		}
+	}
+
+	@Transactional
+	public void updateStudent(Long id,String name, String email){
+		Student student = studentRepository.findById(id).orElseThrow(()-> new IllegalStateException("Student not found"));
+
+		if(name != null && name.length()>0){
+			student.setName(name);			
+		}
+		if(email !=null && email.length()>0){
+			Optional<Student> exists = studentRepository.findStudentByEmail(email);
+			if(exists.isPresent()){
+				throw new IllegalStateException("Email in use");
+			}
+			student.setEmail(email);
 		}
 	}
 
